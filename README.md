@@ -381,11 +381,11 @@ Apply
 ### Raw
 
     lxc file pull container-k3s-m1/tmp/kubeconfig.local /tmp/kubeconfig.local
-    lxc exec container-glrunner-k1 -- bash -c 'mkdir -p /home/gitlab-runner/.kube'
-    lxc file push /tmp/kubeconfig.local container-glrunner-k1/home/gitlab-runner/.kube/config
-    lxc exec container-glrunner-k1 -- bash -c 'chown gitlab-runner: /home/gitlab-runner/.kube'
+    lxc exec container-glrunner-k2 -- bash -c 'mkdir -p /home/gitlab-runner/.kube'
+    lxc file push kube_config.yml container-glrunner-k2/home/gitlab-runner/.kube/config
+    lxc exec container-glrunner-k2 -- bash -c 'chown gitlab-runner: /home/gitlab-runner/.kube'
     
 Then
     
-    lxc exec container-glrunner-k1 -- /bin/bash
+    lxc exec container-glrunner-k2 -- /bin/bash
     kubectl get pods --all-namespaces

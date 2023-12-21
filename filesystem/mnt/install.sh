@@ -72,5 +72,5 @@ echo "Install K8S tools through Arkade"
 
 curl -sLS https://get.arkade.dev | sh
 arkade get kubectl kubectx kubens helm
-chown 755 /root/.arkade/bin/*
+chmod 755 /root/.arkade/bin/*
 mv /root/.arkade/bin/* /usr/local/bin/.
