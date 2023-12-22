@@ -4,17 +4,17 @@
 
 Init container from base image
 
-    lxc init images:debian/bullseye container-glrunner-k1
+    lxc init images:debian/bullseye container-adm-glrunner-k1
 
 Network configuration
 
-    lxc config device override container-glrunner-k1 eth0
-    lxc config device set container-glrunner-k1 eth0 ipv4.address 10.0.1.130
+    lxc config device override container-adm-glrunner-k1 eth0
+    lxc config device set container-adm-glrunner-k1 eth0 ipv4.address 10.0.1.130
 
 Start & enter the container
 
-    lxc start container-glrunner-k1
-    lxc exec container-glrunner-k1 -- /bin/bash
+    lxc start container-adm-glrunner-k1
+    lxc exec container-adm-glrunner-k1 -- /bin/bash
 
 ## Inside
 
@@ -62,7 +62,7 @@ Test your K8s binaries
 
 Check the cluster status
 
-    root@container-glrunner-k1:~# kubestatus 
+    root@container-adm-glrunner-k1:~# kubestatus 
     k8s-status: context=default, namespace=ciam
     
     NAMESPACE              NAME                                               READY   STATUS      RESTARTS   AGE
@@ -80,7 +80,7 @@ Check the cluster status
     cert-manager           cert-manager-cainjector-69d885bf55-csr5s           1/1     Running     0          41m
     secret-agent-system    secret-agent-controller-manager-694f9dbf65-jlrjw   1/1     Running     0          50d
     kube-system            coredns-854c77959c-9rsk9                           1/1     Running     0          55d
-    root@container-glrunner-k1:~#
+    root@container-adm-glrunner-k1:~#
 
 ### Install cert-manager
 [Medium](https://medium.com/@CarlosJuanGP/help-with-certmanager-on-k8s-444db0e1e877)
@@ -381,11 +381,11 @@ Apply
 ### Raw
 
     lxc file pull container-k3s-m1/tmp/kubeconfig.local /tmp/kubeconfig.local
-    lxc exec container-glrunner-k2 -- bash -c 'mkdir -p /home/gitlab-runner/.kube'
-    lxc file push kube_config.yml container-glrunner-k2/home/gitlab-runner/.kube/config
-    lxc exec container-glrunner-k2 -- bash -c 'chown gitlab-runner: /home/gitlab-runner/.kube'
+    lxc exec container-adm-glrunner-k2 -- bash -c 'mkdir -p /home/gitlab-runner/.kube'
+    lxc file push kube_config.yml container-adm-glrunner-k2/home/gitlab-runner/.kube/config
+    lxc exec container-adm-glrunner-k2 -- bash -c 'chown gitlab-runner: /home/gitlab-runner/.kube'
     
 Then
     
-    lxc exec container-glrunner-k2 -- /bin/bash
+    lxc exec container-adm-glrunner-k2 -- /bin/bash
     kubectl get pods --all-namespaces
