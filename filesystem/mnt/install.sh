@@ -63,7 +63,9 @@ echo "Install Terraform"
 curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
 #### After registering the key, you can add the official HashiCorp repository to your system:
 apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-apt-get update && apt-get install terraform -y
+apt-get update
+apt-get install terraform=1.5.7-1 -y
+
 echo "To resolve a complaint that it needs the GPG keys in gpg.d directory"
 cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d
 
@@ -71,6 +73,18 @@ cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d
 echo "Install K8S tools through Arkade"
 
 curl -sLS https://get.arkade.dev | sh
-arkade get kubectl kubectx kubens helm
+arkade get kubectl kubectx kubens helm skaffold
 chmod 755 /root/.arkade/bin/*
 mv /root/.arkade/bin/* /usr/local/bin/.
+
+
+curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
+sudo install skaffold /usr/local/bin/
+
+
+echo "Private Registry secret"
+
+kubectl create secret docker-registry secret-nx-docker-private-read \
+  --docker-server=nexus.adm.acme.corp:18443 \
+  --docker-username=nx-docker-private-read \
+  --docker-password=GIT_SA_TOKEN

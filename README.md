@@ -385,7 +385,15 @@ Apply
     lxc file push kube_config.yml container-adm-glrunner-k2/home/gitlab-runner/.kube/config
     lxc exec container-adm-glrunner-k2 -- bash -c 'chown gitlab-runner: /home/gitlab-runner/.kube'
     
+    chmod go-r ~/.kube/config
+    
 Then
     
     lxc exec container-adm-glrunner-k2 -- /bin/bash
     kubectl get pods --all-namespaces
+
+## Test private repo
+
+    crictl pull --creds nx-docker-private-read:changeit nexus.adm.acme.corp:18443/iam/i18n-api:latest
+
+https://media.defense.gov/2021/Aug/03/2002820425/-1/-1/1/CTR_KUBERNETES%20HARDENING%20GUIDANCE.PDF
