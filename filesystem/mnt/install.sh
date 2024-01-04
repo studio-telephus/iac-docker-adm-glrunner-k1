@@ -80,11 +80,3 @@ mv /root/.arkade/bin/* /usr/local/bin/.
 
 curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
 sudo install skaffold /usr/local/bin/
-
-
-echo "Private Registry secret"
-
-kubectl create secret docker-registry secret-nx-docker-private-read \
-  --docker-server=nexus.adm.acme.corp:18443 \
-  --docker-username=nx-docker-private-read \
-  --docker-password=GIT_SA_TOKEN
