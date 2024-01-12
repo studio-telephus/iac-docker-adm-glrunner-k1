@@ -22,7 +22,7 @@ jobs:
               "endpoint": "${{ vars.CI_S3_MINIO_ADM_ENDPOINT }}",
               "access_key": "${{ secrets.CI_MINIO_ADM_SA_ACCESS_KEY }}",
               "secret_key": "${{ secrets.CI_MINIO_ADM_SA_SECRET_KEY }}",
-              "bucket": "platform-state-adm",
+              "bucket": "bucket-platform-state-adm",
               "key": "lxd/glrunner-k1/tfstate.json",
               "region": "main",
               "skip_credentials_validation": true,

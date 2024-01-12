@@ -30,7 +30,7 @@ gitlab-runner register \
     --non-interactive \
     --url https://gitlab.adm.acme.corp/gitlab \
     --registration-token "$GITLAB_RUNNER_REGISTRATION_KEY" \
-    --tag-list "k3s-dev" \
+    --tag-list "k3s-dev,terraform,bw" \
     --executor shell
 
 export cred_home="/home/gitlab-runner"
@@ -80,3 +80,10 @@ mv /root/.arkade/bin/* /usr/local/bin/.
 
 curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
 sudo install skaffold /usr/local/bin/
+rm -f skaffold
+
+echo "Install Bitwarden CLI"
+curl -Lo bw.zip https://github.com/bitwarden/clients/releases/download/cli-v2024.1.0/bw-linux-2024.1.0.zip
+unzip bw.zip -d .
+sudo install bw /usr/local/bin/
+rm -f bw bw.zip
