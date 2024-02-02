@@ -1,25 +1,41 @@
-module "container_adm_glrunner_k1" {
-  source    = "github.com/studio-telephus/terraform-lxd-instance.git?ref=1.0.3"
-  name      = "container-adm-glrunner-k1"
-  image     = "images:debian/bookworm"
-  profiles  = ["limits", "fs-dir", "nw-adm"]
-  autostart = true
-  nic = {
-    name = "eth0"
-    properties = {
-      nictype        = "bridged"
-      parent         = "adm-network"
-      "ipv4.address" = "10.0.10.130"
+locals {
+  name              = "glrunner-k1"
+  docker_image_name = "tel-${var.env}-${local.name}"
+  container_name    = "container-${var.env}-${local.name}"
+  fqdn              = "gitlab.docker.${var.env}.acme.corp"
+  gitlab_address    = "https://${local.fqdn}/gitlab"
+}
+
+resource "docker_image" "gitlab_runner" {
+  name         = local.docker_image_name
+  keep_locally = false
+  build {
+    context = path.module
+    build_args = {
+      _GITLAB_ADDRESS                 = local.gitlab_address
+      _GITLAB_RUNNER_REGISTRATION_KEY = module.bw_gitlab_runner_registration_key.data.password
     }
   }
-  mount_dirs = [
-    "${path.cwd}/filesystem-shared-ca-certificates",
-    "${path.cwd}/filesystem",
-  ]
-  exec_enabled = true
-  exec         = "/mnt/install.sh"
-  environment = {
-    RANDOM_STRING                  = "d4a101e8-e4c1-4382-a9db-c63bdac6b773"
-    GITLAB_RUNNER_REGISTRATION_KEY = var.gitlab_runner_registration_key
+}
+
+resource "docker_volume" "gitlab_runner_home" {
+  name = "volume-${var.env}-${local.name}-home"
+}
+
+resource "docker_container" "gitlab_runner" {
+  name     = local.container_name
+  image    = docker_image.gitlab_runner.image_id
+  restart  = "unless-stopped"
+  hostname = local.container_name
+
+  networks_advanced {
+    name         = "${var.env}-docker"
+    ipv4_address = "10.10.0.130"
+  }
+
+  volumes {
+    volume_name    = docker_volume.gitlab_runner_home.name
+    container_path = "/home/gitlab-runner"
+    read_only      = false
   }
 }

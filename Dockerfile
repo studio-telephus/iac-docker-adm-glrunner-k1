@@ -12,5 +12,3 @@ ENV GITLAB_RUNNER_REGISTRATION_KEY=${_GITLAB_RUNNER_REGISTRATION_KEY}
 RUN bash /mnt/pre-install.sh
 RUN bash /mnt/setup-ca.sh
 RUN bash /mnt/install.sh
-
-EXPOSE 22

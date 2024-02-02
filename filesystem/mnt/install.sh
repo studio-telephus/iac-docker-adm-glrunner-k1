@@ -5,12 +5,8 @@
 ##
 echo "Install GitLab Runner"
 
-# Add the official GitLab repository
-curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" | bash
-
 # Disable skel & install
 export GITLAB_RUNNER_DISABLE_SKEL=true
-apt-get install gitlab-runner -y
 
 echo "Register GitLab Runner"
 gitlab-runner register \
