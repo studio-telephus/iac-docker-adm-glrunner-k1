@@ -21,7 +21,5 @@ module "container_adm_glrunner_k1" {
   environment = {
     RANDOM_STRING                  = "d4a101e8-e4c1-4382-a9db-c63bdac6b773"
     GITLAB_RUNNER_REGISTRATION_KEY = var.gitlab_runner_registration_key
-    GIT_SA_USERNAME                = var.git_sa_username
-    GIT_SA_TOKEN                   = var.git_sa_token
   }
 }

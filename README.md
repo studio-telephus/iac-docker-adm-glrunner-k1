@@ -172,30 +172,6 @@ Disable skel & install
 
     export GITLAB_RUNNER_DISABLE_SKEL=true; apt-get install gitlab-runner -y
 
-### Register the runner
-
-[docs](https://docs.gitlab.com/runner/register/index.html)
-
-(Optional) Import GitLab self-signed CA to truststore
-
-    ca-certificates.md
-
-Register
-
-    gitlab-runner register \
-        --url https://gitlab.adm.acme.corp/gitlab \
-        --registration-token Zje8u3MTuSwzmXcNdDpY \
-        --tag-list "kubernetes"
-
-Enter an executor: custom, docker, parallels, ssh, virtualbox, docker-ssh+machine, docker-ssh, shell, docker+machine,
-kubernetes:
-
-    shell
-
-### Apply Longhorn [docs](https://rancher.com/docs/k3s/latest/en/storage)
-
-    kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml
-
 ### Deploy the Kubernetes Web UI (Dashboard)
 
 Dashboard is a web-based Kubernetes user interface. You can use Dashboard to deploy containerized applications to a
