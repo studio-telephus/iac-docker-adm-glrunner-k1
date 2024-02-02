@@ -1,22 +1,5 @@
 #!/usr/bin/env bash
-: "${GITLAB_ADDRESS?}"
-: "${GITLAB_RUNNER_REGISTRATION_KEY?}"
 
-##
-echo "Install GitLab Runner"
-
-# Disable skel & install
-export GITLAB_RUNNER_DISABLE_SKEL=true
-
-echo "Register GitLab Runner"
-gitlab-runner register \
-    --non-interactive \
-    --url $GITLAB_ADDRESS \
-    --registration-token "$GITLAB_RUNNER_REGISTRATION_KEY" \
-    --tag-list "k3s-dev,terraform,bw" \
-    --executor shell
-
-##
 echo "Install Terraform"
 
 #### The Terraform packages are signed using a private key controlled by HashiCorp, so in most situations the first step would be to configure your system to trust that HashiCorp key for package authentication.
