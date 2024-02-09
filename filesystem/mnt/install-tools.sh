@@ -18,13 +18,13 @@ cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d
 echo "Install K8S tools through Arkade"
 
 curl -sLS https://get.arkade.dev | sh
-arkade get kubectl kubectx kubens helm skaffold
+arkade get kubectl kubectx kubens helm
 chmod 755 /root/.arkade/bin/*
 mv /root/.arkade/bin/* /usr/local/bin/.
 
 
 curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
-sudo install skaffold /usr/local/bin/
+install skaffold /usr/local/bin/
 rm -f skaffold
 
 echo "Install Bitwarden CLI"
