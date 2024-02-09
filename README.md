@@ -48,7 +48,7 @@ Test your profile
 
 Install K8S admin tools
 
-    git clone https://devops:PJ_4tsyYyWDMTtAZKsDz@gitlab.adm.acme.corp/gitlab/studiofrancium/k8s-linux-amd64-bin.git /opt/k-tools-linux-amd64
+    git clone https://devops:PJ_4tsyYyWDMTtAZKsDz@gitlab.docker.adm.acme.corp/gitlab/studiofrancium/k8s-linux-amd64-bin.git /opt/k-tools-linux-amd64
 
 Append to ~/.bash_profile
 

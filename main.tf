@@ -12,6 +12,11 @@ resource "docker_image" "gitlab_runner" {
   build {
     context = path.module
   }
+  triggers = {
+    dir_sha1 = sha1(join("", [
+      filesha1("${path.module}/Dockerfile")
+    ]))
+  }
 }
 
 resource "docker_volume" "gitlab_runner_home" {

@@ -30,5 +30,5 @@ rm -f skaffold
 echo "Install Bitwarden CLI"
 curl -Lo bw.zip https://github.com/bitwarden/clients/releases/download/cli-v2024.1.0/bw-linux-2024.1.0.zip
 unzip bw.zip -d .
-sudo install bw /usr/local/bin/
+install bw /usr/local/bin/
 rm -f bw bw.zip
