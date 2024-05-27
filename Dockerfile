@@ -1,4 +1,4 @@
-FROM gitlab/gitlab-runner:ubuntu-v16.9.0
+FROM gitlab/gitlab-runner:ubuntu-v17.0.0
 
 COPY ./filesystem /.
 COPY ./filesystem-shared-ca-certificates /.
